@@ -17,10 +17,10 @@ Estos tres archivos contienen el código para generar el Workbench.
 
 Ahora deberemos introducir los archivos necesarios para ejecutar el workbench. Para ello
 debemos mirar los *import* de los archivos.
-En *Filter_StageGui.py* se realiza el *import* de filter_stage_fun.py, por tanto
+En *Filter_StageGui.py* se realiza el *import* de *filter_stage_fun.py*, por tanto
 debemos añadir a nuestra carpeta dicho archivo.
 
-Si abrimos filter_stage_fun.py veremos nuevos imports. Estos archivos se encuentran en la 
+Si abrimos *filter_stage_fun.py* veremos nuevos *imports*. Estos archivos se encuentran en la 
 carpeta *comps* y son:
 
 	*beltcl.py*
