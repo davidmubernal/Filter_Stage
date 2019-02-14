@@ -35,29 +35,18 @@ from filter_stage_fun import filter_stage_fun
 
 __dir__ = os.path.dirname(__file__)
 
-"""                    ##########      TEST FUNCTION       ##########
-def MakeBox(box_len = 1, box_wid = 1, box_hei = 1, boxname='box'):
-    doc = FreeCAD.ActiveDocument
-    box =  doc.addObject("Part::Box",boxname)
-    box.Length = box_len
-    box.Width  = box_wid
-    box.Height = box_hei
- """                   ##########      TEST FUNCTION       ##########
 
 # GUI command that links the Python script
 class _FilterStageCmd:
-    """Command to create a box"""
-
     
     def Activated(self):
         # what is done when the command is clicked
         
-        filter_stage_fun()
-                        #pulley_r = ,
-                         #pulley_h = ,
-                         #pulley_c = ,
-                         #tens_stroke = 15,
-                         #base_w = 
+        filter_stage_fun(belt_h = 15,
+                         nut_hole = 4,
+                         tens_stroke_Var = 15,
+                         base_w = 12,    #Don't do anythink
+                         wall_thick_Var = 3) 
                          
     def GetResources(self):
         # icon and command information
@@ -94,39 +83,8 @@ class FilterStageSimpleTaskPanel:
     #   FreeCADGui.Control.closeDialog()
 
 # GUI command that links the Python script
-"""
-class _FilterStageDialogCmd:
-    Command to create a box with a very simple dialog
-    
 
-    def Activated(self):
-        # what is done when the command is clicked
-        # creates a panel with a dialog
-        baseWidget = QtGui.QWidget()
-        panel = FilterStageSimpleTaskPanel(baseWidget)
-        # having a panel with a widget in self.form and the accept and 
-        # reject functions (if needed), we can open it:
-        FreeCADGui.Control.showDialog(panel)
-
-    def GetResources(self):
-        # icon and command information
-        MenuText = QtCore.QT_TRANSLATE_NOOP(
-            'FilterStage_D',
-            'Filter Stage Dialog')
-        ToolTip = QtCore.QT_TRANSLATE_NOOP(
-            'FilterStage_D',
-            'Creates a box using a task panel dialog')
-        return {
-            'Pixmap': __dir__ + '/icons/Filter_Stage_Dialog_cmd.svg',
-            'MenuText': MenuText,
-            'ToolTip': ToolTip}
-
-    def IsActive(self):
-        # The command will be active if there is an active document
-        return not FreeCAD.ActiveDocument is None
-"""
-
-class FilterStageEdgePTaskPanel:                                    ##############     IMPORTANT       ##############
+class FilterStageEdgePTaskPanel:                                    
     def __init__(self,widget):
         self.form = widget
         # The layout will be a grid, since the form is an argument
@@ -135,88 +93,95 @@ class FilterStageEdgePTaskPanel:                                    ############
 
         # ---- row 0: Pulley Radio
         # Label:
-        self.pulley_r_Label = QtGui.QLabel("Pulley Radio:")
+        self.nut_hole_Label = QtGui.QLabel("Nut Hole:")
         # Spin Box that takes doubles
-        self.pulley_r_Value = QtGui.QDoubleSpinBox()
-        # Default value                                             ##############     IMPORTANT       ##############
-        self.pulley_r_Value.setValue(1)
-        # suffix to indicate the units                              ##############     IMPORTANT       ##############
-        self.pulley_r_Value.setSuffix(' mm')
+        self.nut_hole_Value = QtGui.QDoubleSpinBox()
+        # Default value                                             
+        self.nut_hole_Value.setValue(4)
+        # suffix to indicate the units                              
+        self.nut_hole_Value.setSuffix(' mm')
 
         # row 0, column 0, rowspan 1, colspan 1
-        layout.addWidget(self.pulley_r_Label,0,0,1,1)
+        layout.addWidget(self.nut_hole_Label,0,0,1,1)
         # row 0, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.pulley_r_Value,0,1,1,1)
+        layout.addWidget(self.nut_hole_Value,0,1,1,1)
 
         # ---- row 1: Pulley height
         # Label:
-        self.pulley_h_Label = QtGui.QLabel("Pulley height:")
+        self.belt_h_Label = QtGui.QLabel("Belt height:")
         # Spin Box that takes doubles
-        self.pulley_h_Value = QtGui.QDoubleSpinBox()
+        self.belt_h_Value = QtGui.QDoubleSpinBox()
         # Default value
-        self.pulley_h_Value.setValue(1)
+        self.belt_h_Value.setValue(15)
         # suffix to indicate the units
-        self.pulley_h_Value.setSuffix(' mm')
+        self.belt_h_Value.setSuffix(' mm')
 
         # row 1, column 0, rowspan 1, colspan 1
-        layout.addWidget(self.pulley_h_Label,1,0,1,1)
+        layout.addWidget(self.belt_h_Label,1,0,1,1)
         # row 1, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.pulley_h_Value,1,1,1,1)
+        layout.addWidget(self.belt_h_Value,1,1,1,1)
 
-        # ---- row 2: Pulley center height
-        # Label:
-        self.pulley_c_Label = QtGui.QLabel("Pulley center height:")
-        # Spin Box that takes doubles
-        self.pulley_c_Value = QtGui.QDoubleSpinBox()
-        # Default value
-        self.pulley_c_Value.setValue(1)
-        # suffix to indicate the units
-        self.pulley_c_Value.setSuffix(' mm')
-
-        # row 2, column 0, rowspan 1, colspan 1
-        layout.addWidget(self.pulley_c_Label,2,0,1,1)
-        # row 2, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.pulley_c_Value,2,1,1,1)
-
-        # ---- row 3: Tensioner stroke
+        # ---- row 2: Tensioner stroke
         # Label:
         self.tens_stroke_Label = QtGui.QLabel("Tensioner stroke:")
         # Spin Box that takes doubles
         self.tens_stroke_Value = QtGui.QDoubleSpinBox()
         # Default value
-        self.tens_stroke_Value.setValue(1)
+        self.tens_stroke_Value.setValue(15)
         # suffix to indicate the units
         self.tens_stroke_Value.setSuffix(' mm')
 
-        # row 3, column 0, rowspan 1, colspan 1
-        layout.addWidget(self.tens_stroke_Label,3,0,1,1)
-        # row 3, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.tens_stroke_Value,3,1,1,1)
+        # row 2, column 0, rowspan 1, colspan 1
+        layout.addWidget(self.tens_stroke_Label,2,0,1,1)
+        # row 2, column 1, rowspan 1, colspan 1
+        layout.addWidget(self.tens_stroke_Value,2,1,1,1)
         
-        # ---- row 4: Base width
+        # ---- row 3: Pulley center height
         # Label:
         self.base_w_Label = QtGui.QLabel("Base width:")
         # Spin Box that takes doubles
         self.base_w_Value = QtGui.QDoubleSpinBox()
         # Default value
-        self.base_w_Value.setValue(1)
+        self.base_w_Value.setValue(15)
         # suffix to indicate the units
         self.base_w_Value.setSuffix(' mm')
 
+        # row 3, column 0, rowspan 1, colspan 1
+        layout.addWidget(self.base_w_Label,3,0,1,1)
+        # row 3, column 1, rowspan 1, colspan 1
+        layout.addWidget(self.base_w_Value,3,1,1,1)
+
+        
+        # ---- row 4: Base width
+        # Label:
+        self.wall_th_Label = QtGui.QLabel("Wall thick:")
+        # Spin Box that takes doubles
+        self.wall_th_Value = QtGui.QDoubleSpinBox()
+        # Default value
+        self.wall_th_Value.setValue(3)
+        # suffix to indicate the units
+        self.wall_th_Value.setSuffix(' mm')
+
         # row 4, column 0, rowspan 1, colspan 1
-        layout.addWidget(self.base_w_Label,4,0,1,1)
+        layout.addWidget(self.wall_th_Label,4,0,1,1)
         # row 4, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.base_w_Value,4,1,1,1)
+        layout.addWidget(self.wall_th_Value,4,1,1,1)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
-        pulley_r = self.pulley_r_Value.value()
-        pulley_h = self.pulley_h_Value.value()
-        pulley_c = self.pulley_c_Value.value()
+        belt_h = self.belt_h_Value.value()
+        nut_hole = self.nut_hole_Value.value()
         tens_stroke = self.tens_stroke_Value.value()
         base_w = self.base_w_Value.value()
-        filter_stage_fun(pulley_r, pulley_h, pulley_c, tens_stroke, base_w)
+        wall_thick = self.wall_th_Value.value()
+
+        filter_stage_fun(belt_h, nut_hole, tens_stroke, base_w, wall_thick)
+            #pulley_h => belt_pos_h
+            #nut_hole => nut_holder_thick
+            #tens_stroke => tens_stroke_Var
+            #base_w => hold_bas_l
+            #wall_thick => wall_thick_Var
         FreeCADGui.Control.closeDialog() #close the dialog
 
     # What is done when we click on the cancel button.
@@ -226,8 +191,6 @@ class FilterStageEdgePTaskPanel:                                    ############
 
 # GUI command that links the Python script
 class _FilterStageEdgePCmd:
-    """Command to create a box with a dialog where you can set the Edge length
-    """
 
     def Activated(self):
         # what is done when the command is clicked
@@ -257,5 +220,4 @@ class _FilterStageEdgePCmd:
 
 
 FreeCADGui.addCommand('Filter_Stage_filter_stage', _FilterStageCmd())
-#FreeCADGui.addCommand('Filter_Stage_Dialog', _FilterStageDialogCmd())
 FreeCADGui.addCommand('Filter_Stage_EdgeP', _FilterStageEdgePCmd())

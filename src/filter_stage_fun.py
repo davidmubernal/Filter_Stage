@@ -95,8 +95,20 @@ import FreeCADGui
 import Part
 import DraftVecUtils
 
-sys.path.append (filepath + '/../../' + 'comps')
-#sys.path.append (filepath + '/../' + 'comps')
+# to get the current directory. Freecad has to be executed from the same
+# directory this file is
+filepath = os.getcwd()
+# to get the components
+# In FreeCAD can be added: Preferences->General->Macro->Macro path
+sys.path.append(filepath) 
+sys.path.append(filepath + '/' + 'comps')
+#sys.path.append(filepath + '/../../' + 'comps')
+
+# path to save the FreeCAD files
+fcad_path = filepath + '/../freecad/'
+
+# path to save the STL files
+stl_path = filepath + '/../stl/'
 
 import kcomp
 import fcfun
@@ -115,8 +127,13 @@ from fcfun import VXN, VYN, VZN
 
 doc = FreeCAD.ActiveDocument
 
-#def filter_stage_fun(pulley_r, pulley_h, pulley_c, tens_stroke, base_w):
-def filter_stage_fun():   
+def filter_stage_fun( belt_h, nut_hole, tens_stroke_Var, base_w, wall_thick_Var):
+                    #belt_h => belt_pos_h
+                    #nut_hole => nut_holder_thick
+                    #tens_stroke_Var => tens_stroke
+                    #base_w =>
+                    #wall_thick_Var => wall_thick
+#def filter_stage_fun():   
     # definition of the axes
     #axis_mov   = VX # the filter will move along axis X
     #axis_front = VYN
@@ -277,7 +294,7 @@ def filter_stage_fun():
 
     tensioner_pos = (  belt_pos
                     + DraftVecUtils.scale(axis_mov,
-                        mov_distance/2. + filter_holder.tot_w/2. + tens_stroke)
+                        mov_distance/2. + filter_holder.tot_w/2. + tens_stroke_Var)
                     + DraftVecUtils.scale(axis_up, belt_w/2.))
 
 
@@ -322,11 +339,11 @@ def filter_stage_fun():
                         boltidler_mtr = 3,
                         bolttens_mtr = 3,
                         boltaluprof_mtr = boltaluprof_mtr,
-                        tens_stroke = tens_stroke ,
-                        wall_thick = 3.,
+                        tens_stroke = tens_stroke_Var ,
+                        wall_thick = wall_thick_Var,
                         in_fillet = 2.,
                         pulley_stroke_dist = 0,
-                        nut_holder_thick = 4. ,
+                        nut_holder_thick = nut_hole ,
                         opt_tens_chmf = 1,
                         min_width = 0,
                         tol = kcomp.TOL,

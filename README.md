@@ -1,4 +1,5 @@
 # Filter_Stage
+##Instalación
 Para la instalación del Workbench deberemos acceder a la carpeta de instalación de FreeCAD. Por defecto sera:
 
 	*C:\Program Files\FreeCAD 0.17*
@@ -28,3 +29,16 @@ carpeta *comps* y son:
 	*fc_clss.py*
 	*fcfun.py*
   	*filter_holder_clss.py*
+	*kcomp.py*
+	*kcomp-optic.py*
+	*kpart.py*
+	*partgroup.py*
+	*parts.py*
+	*partset.py*
+	*shp_clss.py*
+	*tensioner_clss.py*
+
+Una vez tengamos estos archivos en nuestra carpeta sólo queda añadir la carpeta *icons* a la misma para poder ver en **FreeCAD** el Workbench
+
+##Funcionamiento del Workbench
+En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
