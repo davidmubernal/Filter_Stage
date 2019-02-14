@@ -1,5 +1,6 @@
 # Filter_Stage
-##Instalación
+## Instalación
+
 Para la instalación del Workbench deberemos acceder a la carpeta de instalación de FreeCAD. Por defecto sera:
 
 	*C:\Program Files\FreeCAD 0.17*
@@ -40,5 +41,6 @@ carpeta *comps* y son:
 
 Una vez tengamos estos archivos en nuestra carpeta sólo queda añadir la carpeta *icons* a la misma para poder ver en **FreeCAD** el Workbench
 
-##Funcionamiento del Workbench
+## Funcionamiento del Workbench
+
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
