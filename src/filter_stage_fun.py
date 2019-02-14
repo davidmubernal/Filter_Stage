@@ -129,9 +129,9 @@ doc = FreeCAD.ActiveDocument
 
 def filter_stage_fun( belt_h, nut_hole, tens_stroke_Var, base_w, wall_thick_Var):
                     #belt_h => belt_pos_h
-                    #nut_hole => nut_holder_thick
+                    #nut_hole => bolttens_mtr
                     #tens_stroke_Var => tens_stroke
-                    #base_w =>
+                    #base_w => aluprof_w
                     #wall_thick_Var => wall_thick
 #def filter_stage_fun():   
     # definition of the axes
@@ -166,7 +166,7 @@ def filter_stage_fun( belt_h, nut_hole, tens_stroke_Var, base_w, wall_thick_Var)
     motorshaft_l = 24.
 
     # width of the aluminum profile
-    aluprof_w = 20.
+    aluprof_w = base_w     #Base del tension holder  #20.
     # dictionary with the dimensions of the aluminum profile
     aluprof_dict = kcomp.ALU_PROF[aluprof_w]
 
@@ -337,13 +337,13 @@ def filter_stage_fun( belt_h, nut_hole, tens_stroke_Var, base_w, wall_thick_Var)
                         hold_bas_h = 0,
                         hold_hole_2sides = 1,
                         boltidler_mtr = 3,
-                        bolttens_mtr = 3,
+                        bolttens_mtr = nut_hole,   #métrica del tensor
                         boltaluprof_mtr = boltaluprof_mtr,
                         tens_stroke = tens_stroke_Var ,
                         wall_thick = wall_thick_Var,
                         in_fillet = 2.,
                         pulley_stroke_dist = 0,
-                        nut_holder_thick = nut_hole ,
+                        nut_holder_thick = nut_hole ,   
                         opt_tens_chmf = 1,
                         min_width = 0,
                         tol = kcomp.TOL,

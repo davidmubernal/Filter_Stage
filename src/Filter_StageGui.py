@@ -45,7 +45,7 @@ class _FilterStageCmd:
         filter_stage_fun(belt_h = 15,
                          nut_hole = 4,
                          tens_stroke_Var = 15,
-                         base_w = 12,    #Don't do anythink
+                         base_w = 20,    #Don't do anythink
                          wall_thick_Var = 3) 
                          
     def GetResources(self):
@@ -93,7 +93,7 @@ class FilterStageEdgePTaskPanel:
 
         # ---- row 0: Pulley Radio
         # Label:
-        self.nut_hole_Label = QtGui.QLabel("Nut Hole:")
+        self.nut_hole_Label = QtGui.QLabel("Nut Type:")     #Métrica de la tuerca
         # Spin Box that takes doubles
         self.nut_hole_Value = QtGui.QDoubleSpinBox()
         # Default value                                             
@@ -142,7 +142,7 @@ class FilterStageEdgePTaskPanel:
         # Spin Box that takes doubles
         self.base_w_Value = QtGui.QDoubleSpinBox()
         # Default value
-        self.base_w_Value.setValue(15)
+        self.base_w_Value.setValue(20)
         # suffix to indicate the units
         self.base_w_Value.setSuffix(' mm')
 
@@ -178,9 +178,9 @@ class FilterStageEdgePTaskPanel:
 
         filter_stage_fun(belt_h, nut_hole, tens_stroke, base_w, wall_thick)
             #pulley_h => belt_pos_h
-            #nut_hole => nut_holder_thick
+            #nut_hole => bolttens_mtr
             #tens_stroke => tens_stroke_Var
-            #base_w => hold_bas_l
+            #base_w => aluprof_w
             #wall_thick => wall_thick_Var
         FreeCADGui.Control.closeDialog() #close the dialog
 
