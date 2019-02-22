@@ -47,7 +47,7 @@ Una vez tengamos estos archivos en nuestra carpeta sólo queda añadir la carpet
 
 Si hemos seguido todos los pasos de manera correcta deberíamos tener los siguiente:
 
-!<center>[imagen](carpeta.jpg)</center>
+<center>![imagen](carpeta.jpg)</center>
 
 ## Funcionamiento del Workbench
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
