@@ -46,12 +46,11 @@ En este Workbench tendremos varios botones, cada uno con el fin de cumplir una f
 - El primer botón realiza el filter stage según se diseño.
 
 - El segundo botón nos permite modificar las siguientes 5 variables:
-
-	 Tipo de rosca: limitado al conjunto de roscas definidas en el programa.
- 	 Altura de la correa.
- 	 Tensioner stroke.
- 	 Ancho de la basa: limitado al tamaño del perfil de aluminio definido en el programa.
- 	 Espesor de la pared.
+  - Tipo de rosca: limitado al conjunto de roscas definidas en el programa.
+  - Altura de la correa.
+  - Tensioner stroke.
+  - Ancho de la basa: limitado al tamaño del perfil de aluminio definido en el programa.
+  - Espesor de la pared.
 
 El *tipo de rosca* está limitado al conjunto de roscas definidas en el programa.
 
