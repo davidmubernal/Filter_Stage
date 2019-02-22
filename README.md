@@ -1,6 +1,8 @@
 # Filter_Stage
 ## Instalación
-Será necesario tener instalado el programa *FreeCAD*, se puede descargar en todos los sistemas operativos seleccionando el tuyo desde [este enlace](https://www.freecadweb.org/downloads.php)
+Será necesario tener instalado el programa *FreeCAD*, se puede descargar en todos los sistemas operativos seleccionando el tuyo desde [este enlace][dir]
+
+[dir]: https://www.freecadweb.org/downloads.php
 
 Para la instalación del Workbench deberemos acceder a la carpeta de instalación de *FreeCAD*. Por defecto sera:
 
