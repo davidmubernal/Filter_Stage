@@ -43,7 +43,11 @@ carpeta *comps* y son:
 	shp_clss.py
 	tensioner_clss.py
 
-Una vez tengamos estos archivos en nuestra carpeta sólo queda añadir la carpeta *icons* a la misma para poder ver en **FreeCAD** el Workbench
+Una vez tengamos estos archivos en nuestra carpeta sólo queda añadir la carpeta *icons* a la misma para poder ver en **FreeCAD** el Workbench.
+
+Si hemos seguido todos los pasos de manera correcta deberíamos tener los siguiente:
+
+!F:\TFG\carpeta.jpg
 
 ## Funcionamiento del Workbench
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
