@@ -1,10 +1,9 @@
-# Filter_Stage
+﻿# Filter_Stage
 Este es el Workbench para la generación de la plataforma del filtro óptico.
 
-* [Filter_Stage](#filterstage)
-	* [Instalación](#instalaci%C3%B3n)
-	* [Funcionamiento del Workbench](#funcionamiento-del-workbench)
-	* [Trabajando en:](#trabajando-en)
+* [Instalación](#instalaci%C3%B3n)
+* [Funcionamiento del Workbench](#funcionamiento-del-workbench)
+* [Trabajando en:](#trabajando-en)
 ---
 ## Instalación
 Será necesario tener instalado el programa *FreeCAD*, se puede descargar en todos los sistemas operativos seleccionando el tuyo desde [este enlace][dir]
