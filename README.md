@@ -1,8 +1,7 @@
 # Filter_Stage
-## Índice:
 Este es el Workbench para la generación de la plataforma del filtro óptico.
+
 - [Filter_Stage](#filterstage)
-	- [Índice:](#%C3%ADndice)
 	- [Instalación](#instalaci%C3%B3n)
 	- [Funcionamiento del Workbench](#funcionamiento-del-workbench)
 	- [Trabajando en:](#trabajando-en)
