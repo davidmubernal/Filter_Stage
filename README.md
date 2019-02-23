@@ -28,10 +28,7 @@ Tras crear la carpeta debemos introducir en ella los siguientes archivos princip
 
 Estos tres archivos contienen el código para generar el Workbench.
 
-Ahora deberemos introducir en la carpeta los archivos necesarios para ejecutar el workbench.
-debemos añadir a nuestra carpeta dicho archivo.
-
-También deberemos introducir los siguientes archivos de la carpeta *comps* y son:
+También deberemos introducir los siguientes archivos necesarios para que funcione el *Workbench* que se encuentran en la carpeta *comps* y son:
 
 	beltcl.py
 	comps.py
