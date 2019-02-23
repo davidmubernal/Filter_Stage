@@ -58,11 +58,11 @@ Si hemos seguido todos los pasos de manera correcta deberíamos tener en la carp
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
 - El primer botón realiza el filter stage según se diseño.
 
-  ![imagen](icon/Filter_Stage_cmd.svg)
+  ![imagen](img/Filter_Stage_cmd.png)
 
 - El segundo botón nos permite modificar las siguientes 5 variables:
 
-  ![imagen](icon/Filter_Stage_Mod_cmd.svg)
+  ![imagen](img/Filter_Stage_Mod_cmd.png)
 
   - Tipo de rosca: limitado al conjunto de roscas definidas en el programa.
   - Altura de la correa.
