@@ -49,7 +49,7 @@ También deberemos introducir los siguientes archivos necesarios para que funcio
 	shp_clss.py
 	tensioner_clss.py
 
-Una vez tengamos estos archivos en nuestra carpeta sólo queda crear una carpeta *icons* e introducir los [iconos](dir3) a la misma para poder ver en **FreeCAD** el Workbench.
+Una vez tengamos estos archivos en nuestra carpeta sólo queda crear una carpeta *icons* e introducir los [iconos][dir3] a la misma para poder ver en **FreeCAD** el Workbench.
 
 [dir3]: https://github.com/davidmubernal/Filter_Stage/tree/master/icons
 
