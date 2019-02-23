@@ -1,12 +1,12 @@
 # Filter_Stage
 ## Índice:
 Este es el Workbench para la generación de la plataforma del filtro óptico.
-
 - [Filter_Stage](#filterstage)
 	- [Índice:](#%C3%ADndice)
 	- [Instalación](#instalaci%C3%B3n)
 	- [Funcionamiento del Workbench](#funcionamiento-del-workbench)
 	- [Trabajando en:](#trabajando-en)
+---
 ## Instalación
 Será necesario tener instalado el programa *FreeCAD*, se puede descargar en todos los sistemas operativos seleccionando el tuyo desde [este enlace][dir]
 
@@ -58,6 +58,7 @@ Si hemos seguido todos los pasos de manera correcta deberíamos tener en la carp
 
 ![imagen](img/carpeta.jpg)
 
+---
 ## Funcionamiento del Workbench
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
 1. El primer botón realiza el filter stage según se diseñó.
@@ -74,6 +75,7 @@ En este Workbench tendremos varios botones, cada uno con el fin de cumplir una f
   - Ancho de la base: limitado al tamaño del perfil de aluminio definido en el programa.
   - Espesor de la pared.
 
+---
 ## Trabajando en:
 Actualmente se trabrabaja en:
 - *Botones adicionales para la realización de las piezas principales del proyecto*
