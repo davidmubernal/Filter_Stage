@@ -15,11 +15,11 @@ Para la instalación del Workbench deberemos acceder a la carpeta de instalació
 
 
 Deberemos acceder a la carpeta *Mod* y dentro de esta **crear una carpeta**. 
+Es importante que **el nombre de esta carpeta viene fijado dentro de los archivos principales del Workbench**.
+Si el nombre de la carpeta es distinto al nombre que está especificado en los archivos no veremos el Workbench en *FreeCAD*.
 En este caso la carpeta se llamará **Filter_Stage**.
-Es importante que **el nombre de esta carpeta viene fijado por los archivos principales del Workbench**.
-Si el nombre de la carpeta es distinto al nombre de los archivos no veremos el Workbench en *FreeCAD*.
 
-Tras crear la carpeta debemos introducir los siguientes archivos principales del Workbench:
+Tras crear la carpeta debemos introducir en ella los siguientes archivos principales del Workbench:
 
 	filter_stage_fun.py
 	Filter_StageGui.py
@@ -28,13 +28,10 @@ Tras crear la carpeta debemos introducir los siguientes archivos principales del
 
 Estos tres archivos contienen el código para generar el Workbench.
 
-Ahora deberemos introducir los archivos necesarios para ejecutar el workbench. Para ello
-debemos mirar los *import* de los archivos.
-En *Filter_StageGui.py* se realiza el *import* de *filter_stage_fun.py*, por tanto
+Ahora deberemos introducir en la carpeta los archivos necesarios para ejecutar el workbench.
 debemos añadir a nuestra carpeta dicho archivo.
 
-Si abrimos *filter_stage_fun.py* veremos nuevos *imports*. Estos archivos se encuentran en la 
-carpeta *comps* y son:
+También deberemos introducir los siguientes archivos de la carpeta *comps* y son:
 
 	beltcl.py
 	comps.py
