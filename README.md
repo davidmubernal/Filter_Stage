@@ -14,10 +14,11 @@ Es importante que **el nombre de esta carpeta viene fijado por los archivos prin
 Si el nombre de la carpeta es distinto al nombre de los archivos no veremos el Workbench en *FreeCAD*.
 
 Tendremos que descargar los archivos necesarios para instalar el Workbench. Estos archivos se encuentran [aquí][dir2]
-Tras crear la carpeta debemos introducir los siguiente [archivos principales][dir2] del Workbench:
+[dir2]: http://www.github.com/davidmubernal/Filter_Stage/src
+Tras crear la carpeta debemos introducir los siguientes archivos principales del Workbench:
 
-[dir2]: http://www.github.com/davidmubernal/src
 
+	filter_stage_fun.py
 	Filter_StageGui.py
 	Init.py
 	InitGui.py
