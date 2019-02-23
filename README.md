@@ -76,5 +76,4 @@ El *tipo de rosca* está limitado al conjunto de roscas definidas en el programa
 ## Trabajando en:
 Actualmente se trabrabaja en:
 - *Botones adicionales para la realización de las piezas principales del proyecto*
-- *Nuevos iconos para los botones actuales*
 - *Mejora del segundo botón limitando las opciones de las roscas a las definidas*
