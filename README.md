@@ -8,12 +8,15 @@ Para la instalación del Workbench deberemos acceder a la carpeta de instalació
 
 	C:\Program Files\FreeCAD 0.17
 
-Deberemos acceder a la carpeta *Mod* y dentro de esta crear una carpeta. 
+Deberemos acceder a la carpeta *Mod* y dentro de esta **crear una carpeta**. 
 En este caso la carpeta se llamará **Filter_Stage**.
 Es importante que **el nombre de esta carpeta viene fijado por los archivos principales del Workbench**.
 Si el nombre de la carpeta es distinto al nombre de los archivos no veremos el Workbench en *FreeCAD*.
 
-Tras crear la carpeta debemos introducir los archivos principales del Workbench:
+Tendremos que descargar los archivos necesarios para instalar el Workbench. Estos archivos se encuentran [aquí][dir2]
+Tras crear la carpeta debemos introducir los siguiente [archivos principales][dir2] del Workbench:
+
+[dir2]: http://www.github.com/davidmubernal/src
 
 	Filter_StageGui.py
 	Init.py
@@ -52,7 +55,9 @@ Si hemos seguido todos los pasos de manera correcta deberíamos tener en la carp
 ## Funcionamiento del Workbench
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
 - El primer botón realiza el filter stage según se diseño.
+  ![imagen](icon/Filter_Stage_cmd.svg)
 - El segundo botón nos permite modificar las siguientes 5 variables:
+  ![imagen](icon/Filter_Stage_Mod_cmd.svg)
   - Tipo de rosca: limitado al conjunto de roscas definidas en el programa.
   - Altura de la correa.
   - Tensioner stroke.
