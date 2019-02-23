@@ -19,22 +19,21 @@ Para la instalación del Workbench deberemos acceder a la carpeta de instalació
 
 	C:\Program Files\FreeCAD 0.17
 
-
 Deberemos acceder a la carpeta *Mod* y dentro de esta **crear una carpeta**.  
 Es importante que **el nombre de esta carpeta viene fijado dentro del archivo principal del Workbench llamado _InitGui.py_**.
 Si el nombre de la carpeta es distinto al nombre que está especificado en el archivo no veremos el Workbench en *FreeCAD*.  
 En este caso la carpeta se llamará **Filter_Stage**.
 
-Tras crear la carpeta debemos introducir en ella los siguientes archivos principales del Workbench:
+Tras crear la carpeta debemos introducir en ella los siguientes archivos principales del Workbench que hemos descarcado anteriormente:
 
 	filter_stage_fun.py
 	Filter_StageGui.py
 	Init.py
 	InitGui.py
 
-Estos tres archivos contienen el código para generar el Workbench.
+Estos cuatro archivos contienen el código para generar el Workbench.
 
-También deberemos introducir los siguientes archivos necesarios para que funcione el *Workbench* que se encuentran en la carpeta *comps* y son:
+También deberemos introducir los siguientes archivos necesarios para que funcione el *Workbench* que se encuentran en la carpeta *comps* dentro de la carpeta descargada inicialmente y son:
 
 	beltcl.py
 	comps.py
