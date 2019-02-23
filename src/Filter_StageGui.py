@@ -84,7 +84,7 @@ class FilterStageSimpleTaskPanel:
 
 # GUI command that links the Python script
 
-class FilterStageEdgePTaskPanel:                                    
+class FilterStageModTaskPanel:                                    
     def __init__(self,widget):
         self.form = widget
         # The layout will be a grid, since the form is an argument
@@ -190,13 +190,13 @@ class FilterStageEdgePTaskPanel:
     #   FreeCADGui.Control.closeDialog()
 
 # GUI command that links the Python script
-class _FilterStageEdgePCmd:
+class _FilterStageModCmd:
 
     def Activated(self):
         # what is done when the command is clicked
         # creates a panel with a dialog
         baseWidget = QtGui.QWidget()
-        panel = FilterStageEdgePTaskPanel(baseWidget)
+        panel = FilterStageModTaskPanel(baseWidget)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
@@ -208,9 +208,9 @@ class _FilterStageEdgePCmd:
             'Edge Parameter Filter Stage Dialog')
         ToolTip = QtCore.QT_TRANSLATE_NOOP(
             'Filter_Stage_PBox',
-            'Creates a box using a dialog to choose the edge length')
+            'Creates a Filter Stage with set parametres')
         return {
-            'Pixmap': __dir__ + '/icons/Filter_Stage_Edge_cmd.svg',
+            'Pixmap': __dir__ + '/icons/Filter_Stage_Mod_cmd.svg',
             'MenuText': MenuText,
             'ToolTip': ToolTip}
 
@@ -220,4 +220,4 @@ class _FilterStageEdgePCmd:
 
 
 FreeCADGui.addCommand('Filter_Stage_filter_stage', _FilterStageCmd())
-FreeCADGui.addCommand('Filter_Stage_EdgeP', _FilterStageEdgePCmd())
+FreeCADGui.addCommand('Filter_Stage_Mod', _FilterStageModCmd())
