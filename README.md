@@ -1,4 +1,8 @@
 # Filter_Stage
+## Índice:
+	1. [Instalación](#instalación)
+	2. [Funcionamiento del workbench](#funcionamiento del workbench)
+	3. [Trabajando en](#trabajando en)
 ## Instalación
 Será necesario tener instalado el programa *FreeCAD*, se puede descargar en todos los sistemas operativos seleccionando el tuyo desde [este enlace][dir]
 
@@ -16,7 +20,7 @@ Para la instalación del Workbench deberemos acceder a la carpeta de instalació
 
 Deberemos acceder a la carpeta *Mod* y dentro de esta **crear una carpeta**.  
 Es importante que **el nombre de esta carpeta viene fijado dentro del archivo principal del Workbench llamado _InitGui.py_**.
-Si el nombre de la carpeta es distinto al nombre que está especificado en los archivos no veremos el Workbench en *FreeCAD*.  
+Si el nombre de la carpeta es distinto al nombre que está especificado en el archivo no veremos el Workbench en *FreeCAD*.  
 En este caso la carpeta se llamará **Filter_Stage**.
 
 Tras crear la carpeta debemos introducir en ella los siguientes archivos principales del Workbench:
@@ -52,20 +56,19 @@ Si hemos seguido todos los pasos de manera correcta deberíamos tener en la carp
 
 ## Funcionamiento del Workbench
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
-- El primer botón realiza el filter stage según se diseño.
+1. El primer botón realiza el filter stage según se diseñó.
 
   ![imagen](img/Filter_Stage_cmd.png)
 
-- El segundo botón nos permite modificar las siguientes 5 variables:
+2. El segundo botón nos permite modificar las siguientes 5 variables:
 
   ![imagen](img/Filter_Stage_Mod_cmd.png)
 
   - Tipo de rosca: limitado al conjunto de roscas definidas en el programa.
   - Altura de la correa.
   - Tensioner stroke.
-  - Ancho de la basa: limitado al tamaño del perfil de aluminio definido en el programa.
+  - Ancho de la base: limitado al tamaño del perfil de aluminio definido en el programa.
   - Espesor de la pared.
-El *tipo de rosca* está limitado al conjunto de roscas definidas en el programa.
 
 ## Trabajando en:
 Actualmente se trabrabaja en:
