@@ -11,7 +11,7 @@ Para la instalación del Workbench deberemos acceder a la carpeta de instalació
 Deberemos acceder a la carpeta *Mod* y dentro de esta crear una carpeta. 
 En este caso la carpeta se llamará **Filter_Stage**.
 Es importante que **el nombre de esta carpeta viene fijado por los archivos principales del Workbench**.
-Si el nombre de la carpeta es distinto al nombre de los archivos no lo veremos en *FreeCAD*.
+Si el nombre de la carpeta es distinto al nombre de los archivos no veremos el Workbench en *FreeCAD*.
 
 Tras crear la carpeta debemos introducir los archivos principales del Workbench:
 
@@ -45,7 +45,7 @@ carpeta *comps* y son:
 
 Una vez tengamos estos archivos en nuestra carpeta sólo queda añadir la carpeta *icons* a la misma para poder ver en **FreeCAD** el Workbench.
 
-Si hemos seguido todos los pasos de manera correcta deberíamos tener los siguiente:
+Si hemos seguido todos los pasos de manera correcta deberíamos tener en la carpeta Filter_Stage lo siguiente:
 
 ![imagen](img/carpeta.jpg)
 
