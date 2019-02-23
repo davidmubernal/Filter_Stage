@@ -8,7 +8,7 @@ Para la instalación del Workbench deberemos acceder a la carpeta de instalació
 
 	C:\Program Files\FreeCAD 0.17
 
-Para la instalación de este *Workbench* tendremos que descargar los archivos necesarios. Estos archivos se encuentran [aquí][dir2].
+Para la instalación de este *Workbench* tendremos que descargar los archivos necesarios que se encuentran [aquí][dir2].
 
 Deberemos acceder a la carpeta *Mod* y dentro de esta **crear una carpeta**. 
 En este caso la carpeta se llamará **Filter_Stage**.
