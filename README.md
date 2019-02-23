@@ -17,7 +17,7 @@ Si el nombre de la carpeta es distinto al nombre de los archivos no veremos el W
 
 Tras crear la carpeta debemos introducir los siguientes archivos principales del Workbench:
 
-[dir2]: http://www.github.com/davidmubernal/Filter_Stage/src
+[dir2]: https://github.com/davidmubernal/Filter_Stage/tree/master/src
 
 	filter_stage_fun.py
 	Filter_StageGui.py
