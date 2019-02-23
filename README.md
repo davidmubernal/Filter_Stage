@@ -4,11 +4,15 @@ Será necesario tener instalado el programa *FreeCAD*, se puede descargar en tod
 
 [dir]: https://www.freecadweb.org/downloads.php
 
+
+También será necesario descargar los archivos que se encuentran [aquí][dir2].
+
+[dir2]: https://github.com/davidmubernal/Filter_Stage/tree/master/src
+
 Para la instalación del Workbench deberemos acceder a la carpeta de instalación de *FreeCAD*. Por defecto sera:
 
 	C:\Program Files\FreeCAD 0.17
 
-Para la instalación de este *Workbench* tendremos que descargar los archivos necesarios que se encuentran [aquí][dir2].
 
 Deberemos acceder a la carpeta *Mod* y dentro de esta **crear una carpeta**. 
 En este caso la carpeta se llamará **Filter_Stage**.
@@ -16,8 +20,6 @@ Es importante que **el nombre de esta carpeta viene fijado por los archivos prin
 Si el nombre de la carpeta es distinto al nombre de los archivos no veremos el Workbench en *FreeCAD*.
 
 Tras crear la carpeta debemos introducir los siguientes archivos principales del Workbench:
-
-[dir2]: https://github.com/davidmubernal/Filter_Stage/tree/master/src
 
 	filter_stage_fun.py
 	Filter_StageGui.py
