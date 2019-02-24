@@ -6,7 +6,7 @@ Este es el Workbench para la generación de la plataforma del filtro óptico.
 3. [Trabajando en:](#trabajando-en)
 ---
 ## Instalación
-Será necesario tener instalado el programa *FreeCAD*, se puede descargar en todos los sistemas operativos seleccionando el tuyo desde [este enlace][dir]
+Será necesario tener instalado el programa *FreeCAD* el cual se puede descargar desde [este enlace][dir]
 
 [dir]: https://www.freecadweb.org/downloads.php
 
