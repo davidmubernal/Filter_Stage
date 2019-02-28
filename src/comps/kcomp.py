@@ -269,8 +269,20 @@ D934_M4 = {
             'l_tol' :  NUT_D934_L[4] + TOL #height with tolerance
            }
 
+
+D934_M5 = {
+            'in_d': 5.,  # inner diameter of the shank
+            'circ_d' : NUT_D934_D[5], #circumdiameter, min value
+            'circ_r' : NUT_D934_D[5]/2, #circumradius, min value
+            'circ_r_tol' : NUT_D934_D[5]/2 +  1.5*TOL , #circumradius + tol
+            'a2' :  NUT_D934_2A[5], #double of apotheme, max value
+            'l' :  NUT_D934_L[5], # height, max value
+            'l_tol' :  NUT_D934_L[5] + TOL #height with tolerance
+           }
+           
 D934 = { 3: D934_M3,
-         4: D934_M4}
+         4: D934_M4,
+         5: D934_M5}
 
 
 # tightening bolt with added tolerances:
