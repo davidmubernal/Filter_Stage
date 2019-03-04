@@ -1212,24 +1212,22 @@ class AluProf_dir (object):
         if wfco == 1:
             fco_aluprof = doc.addObject("Part::Feature", name)
             fco_aluprof.Shape = shp_aluprof
-        
-        self.fco = fco_aluprof
-
-        self.defaluline()
+            self.fco = fco_aluprof
+            self.defaluline()
 
     def color (self, color = (1,1,1)):
         self.fco.ViewObject.ShapeColor = color
         linecol = []
         for col_i in color:
-            print (str(col_i))
+            #print (str(col_i))
             if col_i < 0.2:
                 linecol.append(0.)
             else:
                 linecol.append(col_i - 0.2)
-        print (str(linecol))       
+        #print (str(linecol))       
         self.fco.ViewObject.LineColor = tuple(linecol)
-        print(str(color) + ' -  '  + str(self.fco.ViewObject.LineColor))
-        print(str(linecol))
+        #print(str(color) + ' -  '  + str(self.fco.ViewObject.LineColor))
+        #print(str(linecol))
 
     def linecolor (self, color = (1,1,1)):
         self.fco.ViewObject.LineColor = color
