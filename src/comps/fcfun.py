@@ -569,6 +569,7 @@ def get_tangent_2circles (center1_pt,
     return L
 
 
+
 #L = get_tangent_2circles (
 #                          center1_pt = V0,
 #                          center2_pt = FreeCAD.Vector(20,0,0),
@@ -585,6 +586,33 @@ def get_tangent_2circles (center1_pt,
 #Part.show(line_1)
 #line_2 = Part.LineSegment(L[1][0], L[1][1]).toShape()
 #Part.show(line_2)
+
+
+
+ 
+
+def fuseshplist (shp_list):
+
+    """ since multifuse methods needs to be done by a shape and a list,
+        and usually I have a list that I want to fuse, I make this function
+        to save the inconvenience of doing everytime what I will do here
+        Fuse multiFuse
+    """
+
+    if len(shp_list) > 0:
+        shp1 = shp_list.pop() #remove and get the first element
+        if len(shp_list) > 0:
+            shpfuse = shp1.multiFuse(shp_list)
+        else: #only one element, no fuse:
+            logger.debug('only one element to fuse')
+            shpfuse = shp1
+    else:
+        logger.debug('empty list to fuse')
+        return
+
+    return (shpfuse)
+        
+
 
 
 
@@ -2250,6 +2278,341 @@ def shp_cylhole_gen (r_out, r_in, h,
 #                       pos = V0)
 #                       #pos = FreeCAD.Vector(1,2,3))
 #Part.show(cyl)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def shp_cylhole_arc (r_out, r_in, h,
+                     axis_h = VZ, axis_ra = None, axis_rb = None,
+                     end_angle = 360,
+                     pos_h = 0, pos_ra = 0, pos_rb = 0,
+                     xtr_top=0, xtr_bot=0,
+                     xtr_r_out=0, xtr_r_in=0,
+                     pos = V0):
+    """
+    This is similar to make shp_cylhole_gen but not for a whole, just an arc
+    I don't know how where makeCircle starts its startangle and end angle
+    That is why I use this way
+
+    Makes a hollow cylinder in any position and direction, with optional extra
+    heights, and inner and outer radius, and various locations in the cylinder
+
+    Returns: a TopoShape
+
+    Parameters:
+    -----------
+    r_out : float
+        radius of the outside cylinder
+    r_in : float
+        radius of the inner hole of the cylinder
+    h : float
+        height of the cylinder
+    axis_h : FreeCAD.Vector
+        vector along the cylinder height
+    axis_ra : FreeCAD.Vector
+        vector along the cylinder radius, a direction perpendicular to axis_h
+        it is not necessary if pos_ra == 0
+        It can be None, but if None, axis_rb has to be None
+        Defines the starting angle
+    axis_rb : FreeCAD.Vector
+        vector along the cylinder radius,
+        a direction perpendicular to axis_h and axis_ra
+        it is not necessary if pos_ra == 0
+        It can be None
+    end_angle : float (in degrees)
+        rotating from axis_ra in the direction determined by axis_h 
+    pos_h : int
+        location of pos along axis_h (0, 1)
+        0: the cylinder pos is centered along its height, not considering
+           xtr_top, xtr_bot
+        1: the cylinder pos is at its base (not considering xtr_h)
+    pos_ra : int
+        location of pos along axis_ra (0, 1)
+        0: pos is at the circunference center
+        1: pos is at the inner circunsference, on axis_ra, at r_in from the
+           circle center (not at r_in + xtr_r_in)
+        2: pos is at the outer circunsference, on axis_ra, at r_out from the
+           circle center (not at r_out + xtr_r_out)
+    pos_rb : int
+        location of pos along axis_ra (0, 1)
+        0: pos is at the circunference center
+        1: pos is at the inner circunsference, on axis_rb, at r_in from the
+           circle center (not at r_in + xtr_r_in)
+        2: pos is at the outer circunsference, on axis_rb, at r_out from the
+           circle center (not at r_out + xtr_r_out)
+    xtr_top : float
+        Extra height on top, it is not taken under consideration when
+        calculating the cylinder center along the height
+    xtr_bot : float
+        Extra height at the bottom, it is not taken under consideration when
+        calculating the cylinder center along the height or the position of
+        the base
+    xtr_r_in : float
+        Extra length of the inner radius (hollow cylinder),
+        it is not taken under consideration when calculating pos_ra or pos_rb.
+        It can be negative, so this inner radius would be smaller
+    xtr_r_out : float
+        Extra length of the outer radius
+        it is not taken under consideration when calculating pos_ra or pos_rb.
+        It can be negative, so this outer radius would be smaller
+    pos : FreeCAD.Vector
+        Position of the cylinder, taking into account where the center is
+
+
+    
+    pos_h = 1, pos_ra = 0, pos_rb = 0
+    pos at 1:
+            axis_rb
+              :
+              :
+             . .    
+           . . . .
+         ( (  0  ) ) ---- axis_ra
+           . . . .
+             . .    
+
+           axis_h
+              :
+              :
+          ...............
+         :____:____:....: xtr_top
+         | :     : |
+         | :     : |
+         | :     : |
+         | :  0  : |     0: pos would be at 0, if pos_h == 0
+         | :     : |
+         | :     : |
+         |_:__1__:_|....>axis_ra
+         :.:..o..:.:....: xtr_bot        This o will be pos_o (orig)
+         : :  :
+         : :..:
+         :  + :
+         :r_in:
+         :    :
+         :....:
+           +
+          r_out
+         
+
+    Values for pos_ra  (similar to pos_rb along it axis)
+
+
+           axis_h
+              :
+              :
+          ...............
+         :____:____:....: xtr_top
+         | :     : |
+         | :     : |
+         | :     : |
+         2 1  0  : |....>axis_ra    (if pos_h == 0)
+         | :     : |
+         | :     : |
+         |_:_____:_|.....
+         :.:..o..:.:....: xtr_bot        This o will be pos_o (orig)
+         : :  :
+         : :..:
+         :  + :
+         :r_in:
+         :    :
+         :....:
+           +
+          r_out
+
+   """
+   
+
+    # calculate pos_o, which is at the center of the circle and at the base
+    # counting xtr_bot it is is > 0
+    axis_h = DraftVecUtils.scaleTo(axis_h, 1)
+    
+    # vectors from o (orig) along axis_h, to the pos_h points
+    h_o = {}
+    h_o[0] =  DraftVecUtils.scale(axis_h, h/2. + xtr_bot)
+    h_o[1] =  DraftVecUtils.scale(axis_h, xtr_bot)
+
+    # vectors from o (orig) along axis_ra, to the pos_ra points
+    ra_o = {}
+    ra_o[0] = V0
+    if pos_ra != 0 or end_angle < 360:
+        if axis_ra is not None:
+            axis_ra = DraftVecUtils.scaleTo(axis_ra, 1)
+            ra_o[1] = DraftVecUtils.scale(axis_ra, - r_in)
+            ra_o[2] = DraftVecUtils.scale(axis_ra, - r_out)
+        else :
+            logger.warning('axis_ra not defined while pos_ra ==1')
+            logger.warning('getting any perpendicular')
+            axis_ra = get_fc_perpend1(axis_h)
+    # vectors from o (orig) along axis_rb, to the pos_rb points
+    rb_o = {}
+    rb_o[0] = V0
+    if pos_rb != 0:
+        if axis_rb is not None:
+            axis_rb = DraftVecUtils.scaleTo(axis_rb, 1)
+            rb_o[1] = DraftVecUtils.scale(axis_rb, - r_in)
+            rb_o[2] = DraftVecUtils.scale(axis_rb, - r_out)
+        else :
+            logger.error('axis_rb not defined while pos_rb ==1')
+
+    pos_o = pos + (h_o[pos_h] + ra_o[pos_ra] + rb_o[pos_rb]).negative()
+
+    shp_hollowcyl = shp_cylholedir (r_out = r_out + xtr_r_out,
+                                    r_in  = r_in + xtr_r_in,
+                                    h =  h+xtr_bot+xtr_top,
+                                    normal = axis_h,
+                                    pos = pos_o)
+
+    if end_angle < 360:
+        #
+        #   axis_h towards you
+        #
+        #
+        #    2quart(<180)        1quart (<90)
+        #                    ______ > axis_ra
+        #                    \
+        #    3quart(>180)     \  4quart(>270)
+        #                      \
+        #                   :
+        #                   v
+        #                 axis_d_neg
+        #
+        pos_o_cut = pos_o + DraftVecUtils.scale(axis_h, -1)
+        axis_d = DraftVecUtils.rotate(axis_ra, 0.5*math.pi, axis_h) # 90
+        axis_d_neg = DraftVecUtils.scale(axis_d, -1) # 270
+        axis_ra_neg = DraftVecUtils.scale(axis_ra, -1)
+        # to radians
+        rad_angle = end_angle * math.pi /180 
+        # Unit vector in the angle of the cut
+        pos_cut_dir = DraftVecUtils.rotate(axis_ra, rad_angle, axis_h)
+        # position at the cylinder to cut (extra to cut)
+        pos_cut = pos_o_cut + DraftVecUtils.scale(pos_cut_dir,
+                                          2* (r_out + xtr_r_out + 1))
+        cut_h = h+xtr_bot+xtr_top + 2
+        cut_r = r_out + xtr_r_out + 1
+        cut_l = []
+        if end_angle <= 180:
+            # take away the axis_d_neg part
+            shp_cuthalf = shp_box_dir (box_w = 2*cut_r,
+                                       box_d = cut_r,
+                                       box_h = cut_h,
+                                       fc_axis_w = axis_ra,
+                                       fc_axis_h = axis_h,
+                                       fc_axis_d = axis_d_neg,
+                                       cw =1, cd=0, ch=0, pos= pos_o_cut)
+            cut_l.append(shp_cuthalf)
+            if end_angle < 180:
+                if end_angle <= 90:
+                    # take away the axis_ra_neg part
+                    shp_cut2quart = shp_box_dir (
+                                       box_w = cut_r,
+                                       box_d = cut_r,
+                                       box_h = cut_h,
+                                       fc_axis_w = axis_ra_neg,
+                                       fc_axis_h = axis_h,
+                                       fc_axis_d = axis_d,
+                                       cw =0, cd=0, ch=0, pos= pos_o_cut)
+                    cut_l.append(shp_cut2quart)
+                    if end_angle < 90:
+                        pos_cut2 = pos_o_cut + DraftVecUtils.scale(axis_d,
+                                                2* cut_r)
+                        wire_cut = Part.makePolygon([pos_o_cut, pos_cut,
+                                                     pos_cut2, pos_o_cut])
+                        face_cut = Part.Face(wire_cut)
+                        dir_extrud = DraftVecUtils.scaleTo(axis_h, cut_h)
+                        shp_cutangle = face_cut.extrude(dir_extrud)
+                        cut_l.append(shp_cutangle)
+                else : # 90<angle<180
+                    pos_cut2 = pos_o_cut + DraftVecUtils.scale(axis_ra_neg,
+                                            2* cut_r)
+                    wire_cut = Part.makePolygon([pos_o_cut, pos_cut,
+                                                 pos_cut2, pos_o_cut])
+                    face_cut = Part.Face(wire_cut)
+                    dir_extrud = DraftVecUtils.scaleTo(axis_h, cut_h)
+                    shp_cutangle = face_cut.extrude(dir_extrud)
+                    cut_l.append(shp_cutangle)
+
+        else :  # > 180
+            if end_angle <= 270: 
+                shp_cut3quart = shp_box_dir (
+                                       box_w = r_out + xtr_r_out + 1,
+                                       box_d = r_out + xtr_r_out + 1,
+                                       box_h =  h+xtr_bot+xtr_top + 2,
+                                       fc_axis_w = axis_ra,
+                                       fc_axis_h = axis_h,
+                                       fc_axis_d = axis_d_neg,
+                                       cw =0, cd=0, ch=0, pos=pos_o_cut)
+                cut_l.append(shp_cut3quart)
+                if end_angle < 270:
+                    pos_cut2 = pos_o_cut + DraftVecUtils.scale(axis_d_neg,
+                                                2* cut_r)
+                    wire_cut = Part.makePolygon([pos_o_cut, pos_cut,
+                                                 pos_cut2, pos_o_cut])
+                    face_cut = Part.Face(wire_cut)
+                    dir_extrud = DraftVecUtils.scaleTo(axis_h, cut_h)
+                    shp_cutangle = face_cut.extrude(dir_extrud)
+                    cut_l.append(shp_cutangle)
+            else : #>270
+                pos_cut2 = pos_o_cut + DraftVecUtils.scale(axis_ra,
+                                            2* cut_r)
+                wire_cut = Part.makePolygon([pos_o_cut, pos_cut,
+                                             pos_cut2, pos_o_cut])
+                face_cut = Part.Face(wire_cut)
+                dir_extrud = DraftVecUtils.scaleTo(axis_h, cut_h)
+                shp_cutangle = face_cut.extrude(dir_extrud)
+                cut_l.append(shp_cutangle)
+
+        shp_cutangle = fuseshplist(cut_l)
+        shp_hollowcyl = shp_hollowcyl.cut(shp_cutangle)
+
+
+    return shp_hollowcyl
+
+#cyl = shp_cylhole_arc (r_in=2, r_out=5, h=4,
+#                       #axis_h = FreeCAD.Vector(1,1,0), 
+#                       axis_h = VZ,
+#                       axis_ra = VX, axis_rb = VYN,
+#                       end_angle = 60,
+#                       pos_h = 0,  pos_ra = 1, pos_rb = 2,
+#                       xtr_top=0, xtr_bot=1,
+#                       xtr_r_in=0, xtr_r_out=-1,
+#                       pos = V0)
+                       #pos = FreeCAD.Vector(1,2,3))
+#Part.show(cyl)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def add2CylsHole (r1, h1, r2, h2, thick,
                   normal = VZ, pos = V0):
@@ -4570,6 +4933,247 @@ def shp_regprism_dirxtr (n_sides, radius, length,
     shp_rprism = shp_extrud_face(shp_rpolygon_face,
                                  totlen, nnorm,centered)
     return shp_rprism
+
+
+
+
+def shp_cylhole_bolthole (r_out, r_in, h,
+                     n_bolt = 4, d_bolt = 0, r_bolt2cen = 0,
+                     axis_h = VZ, axis_ra = VY, axis_rb = None,
+                     bolt_axis_ra = 1,
+                     pos_h = 0, pos_ra = 0, pos_rb = 0,
+                     xtr_top=0, xtr_bot=0,
+                     xtr_r_out=0, xtr_r_in=0,
+                     pos = V0):
+    """
+    This is a generalization of shp_cylholedir and shp_cylhole
+    Makes a hollow cylinder in any position and direction, with optional extra
+    heights, and inner and outer radius, and various locations in the cylinder
+
+    Also has a number of nbolt holes along a radius r_bolt2cen
+    the bolts a equi spaced depending on the number
+
+    Returns: a TopoShape
+
+    Parameters:
+    -----------
+    r_out : float
+        radius of the outside cylinder
+    r_in : float
+        radius of the inner hole of the cylinder
+    h : float
+        height of the cylinder
+    n_bolt : int
+        number of bolt holes, if zero no bolt holes
+    d_bolt : float
+        diameter of the bolt holes
+    r_bolt2cen : float
+        distance (radius) from the cylinder center to the bolt hole centers
+    bolt_axis_ra : int
+        1: the first bolt will be on axis ra
+        0: the first bolt will be rotated half of the angle between to bolt
+           holes -> centered on the side
+    axis_h : FreeCAD.Vector
+        vector along the cylinder height
+    axis_ra : FreeCAD.Vector
+        vector along the cylinder radius, a direction perpendicular to axis_h
+        it is not necessary if pos_ra == 0
+        It can be None, but if None, axis_rb has to be None
+    axis_rb : FreeCAD.Vector
+        vector along the cylinder radius,
+        a direction perpendicular to axis_h and axis_ra
+        it is not necessary if pos_ra == 0
+        It can be None
+    pos_h : int
+        location of pos along axis_h (0, 1)
+        0: the cylinder pos is centered along its height, not considering
+           xtr_top, xtr_bot
+        1: the cylinder pos is at its base (not considering xtr_h)
+    pos_ra : int
+        location of pos along axis_ra (0, 1)
+        0: pos is at the circunference center
+        1: pos is at the inner circunsference, on axis_ra, at r_in from the
+           circle center (not at r_in + xtr_r_in)
+        2: pos is at the center of the bolt hole (one of them)
+        3: pos is at the outer circunsference, on axis_ra, at r_out from the
+           circle center (not at r_out + xtr_r_out)
+    pos_rb : int
+        location of pos along axis_ra (0, 1)
+        0: pos is at the circunference center
+        1: pos is at the inner circunsference, on axis_rb, at r_in from the
+           circle center (not at r_in + xtr_r_in)
+        2: pos is at the center of the bolt hole (one of them)
+        3: pos is at the outer circunsference, on axis_rb, at r_out from the
+           circle center (not at r_out + xtr_r_out)
+    xtr_top : float
+        Extra height on top, it is not taken under consideration when
+        calculating the cylinder center along the height
+    xtr_bot : float
+        Extra height at the bottom, it is not taken under consideration when
+        calculating the cylinder center along the height or the position of
+        the base
+    xtr_r_in : float
+        Extra length of the inner radius (hollow cylinder),
+        it is not taken under consideration when calculating pos_ra or pos_rb.
+        It can be negative, so this inner radius would be smaller
+    xtr_r_out : float
+        Extra length of the outer radius
+        it is not taken under consideration when calculating pos_ra or pos_rb.
+        It can be negative, so this outer radius would be smaller
+    pos : FreeCAD.Vector
+        Position of the cylinder, taking into account where the center is
+
+
+    
+    pos_h = 1, pos_ra = 0, pos_rb = 0
+    pos at 1:
+            axis_rb
+              :
+              :
+             . .     o: are n_bolt(4) holes
+           .o. .o.
+         ( (  0  ) ) ---- axis_ra
+           .o. .o.
+             . .    
+
+           axis_h
+              :
+              :
+          ...............
+         :____:____:....: xtr_top
+         | :     : |
+         | :     : |
+         | :     : |
+         | :  0  : |     0: pos would be at 0, if pos_h == 0
+         | :     : |
+         | :     : |
+         |_:__1__:_|....>axis_ra
+         :.:..o..:.:....: xtr_bot        This o will be pos_o (orig)
+         : :  :
+         : :..:
+         :  + :
+         :r_in:
+         :    :
+         :....:
+           +
+          r_out
+         
+
+    Values for pos_ra  (similar to pos_rb along it axis)
+
+
+             axis_h
+                :
+        d_bolt  :
+          :.:............
+         :_:_:__:__:_:....: xtr_top
+         | : :     : : |
+         | : :     : : |
+         | : :     : : |
+         3 2 1  0  : : |....>axis_ra    (if pos_h == 0)
+         | : :     : : |
+         | : :     : : |
+         |_:_:_____:_:_|.....
+         :.: :..o..:.:....: xtr_bot        This o will be pos_o (orig)
+         : : :  :
+         : : :..:
+         : :  + :
+         : :  r_in
+         : :....:
+         :   + 
+         :  r_bolt2cen:
+         :    :
+         :....:
+           +
+          r_out
+
+   """
+   
+
+    # calculate pos_o, which is at the center of the circle and at the base
+    # counting xtr_bot it is is > 0
+    axis_h = DraftVecUtils.scaleTo(axis_h, 1)
+    
+    # vectors from o (orig) along axis_h, to the pos_h points
+    h_o = {}
+    h_o[0] =  DraftVecUtils.scale(axis_h, h/2. + xtr_bot)
+    h_o[1] =  DraftVecUtils.scale(axis_h, xtr_bot)
+
+    # vectors from o (orig) along axis_ra, to the pos_ra points
+    ra_o = {}
+    ra_o[0] = V0
+    if pos_ra != 0:
+        if axis_ra is not None:
+            axis_ra = DraftVecUtils.scaleTo(axis_ra, 1)
+            ra_o[1] = DraftVecUtils.scale(axis_ra, - r_in)
+            ra_o[2] = DraftVecUtils.scale(axis_ra, - r_bolt2cen)
+            ra_o[3] = DraftVecUtils.scale(axis_ra, - r_out)
+        else :
+            logger.error('axis_ra not defined while pos_ra ==1')
+    
+    # vectors from o (orig) along axis_rb, to the pos_rb points
+    rb_o = {}
+    rb_o[0] = V0
+    if pos_rb != 0:
+        if axis_rb is not None:
+            axis_rb = DraftVecUtils.scaleTo(axis_rb, 1)
+            rb_o[1] = DraftVecUtils.scale(axis_rb, - r_in)
+            rb_o[2] = DraftVecUtils.scale(axis_rb, - r_bolt2cen)
+            rb_o[3] = DraftVecUtils.scale(axis_rb, - r_out)
+        else :
+            logger.error('axis_rb not defined while pos_rb ==1')
+
+    pos_o = pos + (h_o[pos_h] + ra_o[pos_ra] + rb_o[pos_rb]).negative()
+
+    if r_in > 0:
+        shp_holecyl = shp_cylholedir (r_out = r_out + xtr_r_out,
+                                        r_in  = r_in + xtr_r_in,
+                                        h =  h+xtr_bot+xtr_top,
+                                        normal = axis_h,
+                                        pos = pos_o)
+    else: # without central hole
+        shp_holecyl = shp_cyl (r= r_out + xtr_r_out,
+                                 h =  h+xtr_bot+xtr_top,
+                                 normal = axis_h,
+                                 pos = pos_o)
+
+    # bolt holes:
+    if  (n_bolt > 0 and d_bolt > 0 and r_bolt2cen > 0) :
+       if bolt_axis_ra == 0:
+           axis_x = DraftVecUtils.rotate(axis_ra, math.pi/n_bolt, axis_h)
+       else:
+           axis_x = axis_ra
+       boltcen_l = regpolygon_dir_vecl (n_bolt, r_bolt2cen,
+                                       fc_normal= axis_h,
+                                       fc_verx1 =axis_x,
+                                       pos = pos_o)
+       bolt_cyl_l = []
+       
+       for boltcen in boltcen_l:
+          shp_bolt_cyl = shp_cylcenxtr (r = d_bolt/2., h = h,
+                                        normal = axis_h,
+                                        ch = 0, xtr_top=1, xtr_bot=1,
+                                        pos = boltcen)
+          bolt_cyl_l.append(shp_bolt_cyl)
+       boltfuse_shp = fuseshplist(bolt_cyl_l)
+       shp_holecyl = shp_holecyl.cut(boltfuse_shp)
+
+
+    return shp_holecyl
+
+
+#shp_holecyl = shp_cylhole_bolthole (r_out = 20. , r_in = 0, h=10.,
+#                     n_bolt = 4, d_bolt = 5+0.5, r_bolt2cen = 31.5/2.,
+#                     axis_h = VXN, axis_ra = VZ, axis_rb = None,
+#                     bolt_axis_ra = 0,
+#                     pos_h = 1, pos_ra = 3, pos_rb = 0,
+#                     xtr_top=0, xtr_bot=0,
+#                     xtr_r_out=0, xtr_r_in=0,
+#                     pos = V0)
+
+
+
+
 
 
 # ------------------ shp_extrud_face
@@ -7167,27 +7771,6 @@ def get_positive_vecname (vecname):
 
 
 
-      
+     
 
-def fuseshplist (shp_list):
-
-    """ since multifuse methods needs to be done by a shape and a list,
-        and usually I have a list that I want to fuse, I make this function
-        to save the inconvenience of doing everytime what I will do here
-        Fuse multiFuse
-    """
-
-    if len(shp_list) > 0:
-        shp1 = shp_list.pop() #remove and get the first element
-        if len(shp_list) > 0:
-            shpfuse = shp1.multiFuse(shp_list)
-        else: #only one element, no fuse:
-            logger.debug('only one element to fuse')
-            shpfuse = shp1
-    else:
-        logger.debug('empty list to fuse')
-        return
-
-    return (shpfuse)
-        
 
