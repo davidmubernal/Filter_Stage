@@ -70,7 +70,7 @@ Si hemos seguido todos los pasos de manera correcta deberíamos tener en la carp
 ## Funcionamiento del Workbench
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.  
   ![imagen](img/botones.jpg)
-1. El primer botón realiza el filter stage según fue diseñado.
+1. El primer botón realiza el filter stage según fue diseñado.  
 	![imagen](img/filter_stage.jpg)
 
 ---
