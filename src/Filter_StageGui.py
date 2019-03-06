@@ -42,11 +42,11 @@ class _FilterStageCmd:
     def Activated(self):
         # what is done when the command is clicked
         
-        filter_stage_fun(belt_h = 15,
+        filter_stage_fun(move_l = 60,
                          nut_hole = 4,
                          tens_stroke_Var = 15,
-                         base_w = 20,    #Don't do anythink
-                         wall_thick_Var = 3) 
+                         base_w = 20, 
+                         wall_thick_Var = 3)  
                          
     def GetResources(self):
         MenuText = QtCore.QT_TRANSLATE_NOOP(
@@ -86,23 +86,38 @@ class FilterStageModTaskPanel:
         # we dont need this statement afterwards: self.form.setLayout(layout)
         layout = QtGui.QGridLayout(self.form)
 
-        # ---- row 0: Pulley height
+        # ---- row 0: Move distance
         # Label:
-        self.belt_h_Label = QtGui.QLabel("Belt height:")
+        self.move_l_Label = QtGui.QLabel("Move distance:")
         # Spin Box that takes doubles
-        self.belt_h_Value = QtGui.QDoubleSpinBox()
+        self.move_l_Value = QtGui.QDoubleSpinBox()
         # Default value
-        self.belt_h_Value.setValue(15)
+        self.move_l_Value.setValue(60)
         # suffix to indicate the units
-        self.belt_h_Value.setSuffix(' mm')
+        self.move_l_Value.setSuffix(' mm')
 
         # row 0, column 0, rowspan 1, colspan 1
-        layout.addWidget(self.belt_h_Label,0,0,1,1)
+        layout.addWidget(self.move_l_Label,0,0,1,1)
         # row 0, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.belt_h_Value,0,1,1,1)
+        layout.addWidget(self.move_l_Value,0,1,1,1)
 
-        # ---- row 1: Tensioner stroke
+        # ---- row 1: Base width
         # Label:
+        self.base_w_Label = QtGui.QLabel("Base width:")  #5/10/15/20/30/40
+        # Spin Box that takes doubles
+        self.ComboBox_base_w = QtGui.QComboBox()
+        # Diferents base
+        self.TextBase_W = ["10mm","15mm","20mm","30mm","40mm"] ############### 5mm don't work well ################
+        self.ComboBox_base_w.addItems(self.TextBase_W)
+        self.ComboBox_base_w.setCurrentIndex(self.TextBase_W.index('20mm'))
+
+        # row 1, column 0, rowspan 1, colspan 1
+        layout.addWidget(self.base_w_Label,1,0,1,1)
+        # row 1, column 1, rowspan 1, colspan 1
+        layout.addWidget(self.ComboBox_base_w,1,1,1,1)
+                
+        # ---- row 2: Tensioner Stroke
+         # Label:
         self.tens_stroke_Label = QtGui.QLabel("Tensioner stroke:")
         # Spin Box that takes doubles
         self.tens_stroke_Value = QtGui.QDoubleSpinBox()
@@ -111,28 +126,12 @@ class FilterStageModTaskPanel:
         # suffix to indicate the units
         self.tens_stroke_Value.setSuffix(' mm')
 
-        # row 1, column 0, rowspan 1, colspan 1
-        layout.addWidget(self.tens_stroke_Label,1,0,1,1)
-        # row 1, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.tens_stroke_Value,1,1,1,1)
-        
-        # ---- row 2: Pulley center height
-        # Label:
-        self.base_w_Label = QtGui.QLabel("Base width:")
-        # Spin Box that takes doubles
-        self.base_w_Value = QtGui.QDoubleSpinBox()
-        # Default value
-        self.base_w_Value.setValue(20)
-        # suffix to indicate the units
-        self.base_w_Value.setSuffix(' mm')
-
         # row 2, column 0, rowspan 1, colspan 1
-        layout.addWidget(self.base_w_Label,2,0,1,1)
+        layout.addWidget(self.tens_stroke_Label,2,0,1,1)
         # row 2, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.base_w_Value,2,1,1,1)
+        layout.addWidget(self.tens_stroke_Value,2,1,1,1)
 
-        
-        # ---- row 3: Base width
+        # ---- row 3: Wall thick
         # Label:
         self.wall_th_Label = QtGui.QLabel("Wall thick:")
         # Spin Box that takes doubles
@@ -152,30 +151,31 @@ class FilterStageModTaskPanel:
         self.nut_hole_Label = QtGui.QLabel("Nut Type:")   
 
         # Combo Box that have multiple choice
-        self.ComboBox_M = QtGui.QComboBox()
-        # Tipe of Nut
-        self.TextIndex = ["M3","M4","M5","M6"]
-        self.ComboBox_M.addItems(self.TextIndex)
+        self.ComboBox_Nut_Hole = QtGui.QComboBox()
+        # Type of Nut
+        self.TextNutType = ["M3","M4","M5","M6"]
+        self.ComboBox_Nut_Hole.addItems(self.TextNutType)
         # Indicate inicial value in ComboBox
-        self.ComboBox_M.setCurrentIndex(self.TextIndex.index('M3'))
+        self.ComboBox_Nut_Hole.setCurrentIndex(self.TextNutType.index('M3'))
 
         # row 4, column 0, rowspan 1, colspan 1
         layout.addWidget(self.nut_hole_Label,4,0,1,1)
         # row 4, column 1, rowspan 1, colspan 1
-        layout.addWidget(self.ComboBox_M,4,1,1,1)
+        layout.addWidget(self.ComboBox_Nut_Hole,4,1,1,1)
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
 
     def accept(self):
-        belt_h = self.belt_h_Value.value()
-        nut_hole = 3 + self.ComboBox_M.currentIndex()  #Index star in 0, first value = 3
+        self.selec_base = {0: 5, 1: 10, 2: 15, 3: 20, 4: 30, 5: 40}
+        move_l = self.move_l_Value.value()
+        nut_hole = 3 + self.ComboBox_Nut_Hole.currentIndex()  #Index star in 0, first value = 3
         tens_stroke = self.tens_stroke_Value.value()
-        base_w = self.base_w_Value.value()
+        base_w = self.selec_base[self.ComboBox_base_w.currentIndex()]
         wall_thick = self.wall_th_Value.value()
 
-        filter_stage_fun(belt_h, nut_hole, tens_stroke, base_w, wall_thick)
+        filter_stage_fun(move_l, nut_hole, tens_stroke, base_w, wall_thick)
             #pulley_h => belt_pos_h
             #nut_hole => bolttens_mtr
             #tens_stroke => tens_stroke_Var
