@@ -3,7 +3,7 @@
 ---
 Este es el Workbench para la generación de la plataforma del filtro óptico.
 
-![imagen](img/Filter_Stage_cmd.png)
+![imagen](img/filter_stage.jpg)
 
 - [Instalación](#instalaci%C3%B3n)
 - [Funcionamiento del Workbench](#funcionamiento-del-workbench)
@@ -68,24 +68,24 @@ Si hemos seguido todos los pasos de manera correcta deberíamos tener en la carp
 ---
 ---
 ## Funcionamiento del Workbench
-En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.
+En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.  
   ![imagen](img/botones.jpg)
 1. El primer botón realiza el filter stage según fue diseñado.
-	![imagen](img/Filter_Stage_cmd.png)
+	![imagen](img/filter_stage.jpg)
 
 ---
 2. El segundo botón nos permite modificar las siguientes 5 variables:
 
-  - Distancia de movimiento.
+  - Distancia de movimiento.  
 		![imagen](img/filter_stage_top.jpg)
-  - Ancho de la base: limitado al tamaño del perfil de aluminio de 10mm, 15mm, 20mm, 30mm y 40mm
+  - Ancho de la base: limitado al tamaño del perfil de aluminio de 10mm, 15mm, 20mm, 30mm y 40mm  
 		![image](img/tensioner_holder_ex_3profiles_side.jpg)
-  - Tensioner stroke.
+  - Tensioner stroke.  
 		![imagen](img/idler_tensioner_stroke_draw.png)
-  - Espesor de la pared. 
+  - Espesor de la pared.  
 		![imagen](img/idler_tensioner_wallthick.jpg)
-  - Tipo de tuerca: limitado a las métricas M3, M4, M5 y M6
-  		![imagen](img/nut_metric.jpg)
+  - Tipo de tuerca: limitado a las métricas M3, M4, M5 y M6  
+  		![imagen](img/nut_metric.jpg)  
   		![imagen](img/nut_metric_2.jpg)
 
 ---
