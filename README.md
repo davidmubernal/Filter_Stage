@@ -8,13 +8,13 @@ Select your lenguage:
 ---
 ---
 ## English
-This is the Workbench to do the stage of the optical filter.
+This is the Workbench to do the stage of the optical filter.  
 ![imagen](img/filter_stage.jpg)
 
 ### Index
--[Intall](install)
--[How it's work](how-it's-work)
--[Working on](working-on)
+-[Intall](install)  
+-[How it's work](how-it's-work)  
+-[Working on](working-on)  
 
 #### Install
 Before the installation of the workbench, it is necessary have installed FreeCAD.  You can download in [this page][dirFreeCADing]
