@@ -2,12 +2,12 @@
 ---
 ---
 Select your lenguage:
-- [English](index)
-- [Spanish](índice)
+- [English](#english)
+- [Spanish](#español)
 
 ---
 ---
-## Inglés
+## English
 This is the Workbench to do the stage of the optical filter.
 ![imagen](img/filter_stage.jpg)
 
