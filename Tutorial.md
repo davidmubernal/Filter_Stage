@@ -3,7 +3,7 @@
 ***
 
 ## Need to know  
-***
+
 To understand this tutorial it is necessary to know how to make a workbench. If you don't know how to do that then visit this [tutorial][dirTuto].
 
 [dirTuto]: https://github.com/felipe-m/tutorial_freecad_wb
@@ -13,7 +13,7 @@ At this moment we know how to do a doble spin widget, but now we will create a C
 ***
 
 ## Do a ComboBox   
-***
+
 To create a ComboBox is used the following statement:
 
     Combo = QtGui.QComboBox()
