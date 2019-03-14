@@ -1,8 +1,8 @@
-#ComboBox Tutorial 
+# ComboBox Tutorial 
 
 ***
 
-##Need to know  
+## Need to know  
 ***
 To understand this tutorial it is necessary to know how to make a workbench. If you don't know how to do that then visit this [tutorial][dirTuto].
 
@@ -12,13 +12,13 @@ At this moment we know how to do a doble spin widget, but now we will create a C
 
 ***
 
-##Do a ComboBox   
+## Do a ComboBox   
 ***
 To create a ComboBox is used the following statement:
 
     Combo = QtGui.QComboBox()
 
-###Add items  
+### Add items  
 You can add one item by doing the following:
 
     Combo.addItem("Item one")
@@ -53,7 +53,7 @@ Now we could do an example of a  Takspanel with a ComboBox:
         # row 0, column 1, rowspan 1, colspan 1
         layout.addWidget(self.Combo,0,1,1,1)
 
-###Recover value  
+### Recover value  
 Finally, we need to recover the value that has been selected by the user. We get that value from the position that the user has selected:
 
     TextSelect = self.Combo.currentIndex()
