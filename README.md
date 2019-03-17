@@ -11,10 +11,10 @@ Select your lenguage:
 This is the Workbench to do the stage of the optical filter.  
 ![imagen](img/filter_stage.jpg)
 
-### Index
--[Intall](install)  
--[How it's work](how-it's-work)  
--[Working on](working-on)  
+### Index  
+- [Intall](install)  
+- [How it's work](how-it's-work)  
+- [Working on](working-on)  
 
 #### Install
 Before the installation of the workbench, it is necessary have installed FreeCAD.  You can download in [this page][dirFreeCADing]
@@ -64,46 +64,71 @@ It is necessary to add the functions where the piece is generated. These files a
     filter_stage_fun.py
 	tensioner_clss.py
 
-When these files are in the folder it is necessary to add the icons. To do that bring in the folde Filter_Stage the folder *icons*.
+When these files are in the folder it is necessary to add the icons. To do that bring the folder *icons* in the folder Filter_Stage .
 
 If all these steps was followed now we have something similar to this:
 
-![imagen](img/carpeta.jpg)
+![folder](img/carpeta.jpg)
 
 ---
 ---
 #### How it work
 This workbench has two buttons  
-![imagen](img/botones.jpg)
+![buttons](img/botones.jpg)
 
-1. The first button creates the filter stage how it is designed.  
-![imagen](img/filter_stage.jpg)
+![filter_stage](img/filter_stage.jpg)
 
 ---
-2. The second button enables setting the values of 5 variable :
+1. The first button creates filter stage. The button enable setting values. If the values are not change, the button will create default filter stage.     
+![layoutFS](img/layoutFS.jpg)  
 
   - Move distance.    
-![imagen](img/filter_stage_top.jpg)
+![move](img/filter_stage_top.jpg)
 
   - Base width: is limited to the aluminum profile size (10mm, 15mm, 20mm, 30mm and 40mm).    
-![image](img/tensioner_holder_ex_3profiles_side.jpg)
+![base](img/tensioner_holder_ex_3profiles_side.jpg)
 
   - Tensioner stroke.  
-![imagen](img/idler_tensioner_stroke_draw.png)
+![tensioner](img/idler_tensioner_stroke_draw.png)
 
   - Wall thickness.    
-![imagen](img/idler_tensioner_wallthick.jpg)
+![wall](img/idler_tensioner_wallthick.jpg)
 
   - Nut type: limit to set metric (M3, M4, M5 and M6).  
-![imagen](img/nut_metric.jpg)  
-![imagen](img/nut_metric_2.jpg)
+![nut_1](img/nut_metric.jpg)  
+![nut_2](img/nut_metric_2.jpg)
 
+2. The second button creates the Filter Holder. The button enable setting the followings values:
+![layoutFH](img/layoutFH.jpg)  
+
+- Size of filter
+- See linear guide (yes/no)
+
+3. The third button creates the Tensioner. The button enable setting the followings values:
+![layoutTensioner](img/layoutTensioner.jpg)  
+
+- Base width
+- Tensioner high
+- Tensioner stroke
+- Wall thickness
+- Nut type
+- See bolts
+
+
+4. The fouth button crates the Motor Holder. The button also anable setting:  
+![layoutMotor](img/layoutMotor.jpg)  
+
+- Motor size  
+- Max high of the rail  
+- See motor or not  
+
+5. The fifth button change the position of the object has been selected to the print position.
 ---
 ---
 #### Working on
 ---
 Currently working:
-- New buttons to generate the different pieces of the project.
+- *Last button can export files in .stl.*
 
 ---
 ---
@@ -115,7 +140,7 @@ Este es el Workbench para la generación de la plataforma del filtro óptico.
 ### Índice
 - [Instalación](#instalaci%C3%B3n)
 - [Funcionamiento del Workbench](#funcionamiento-del-workbench)
-- [Trabajando en:](#trabajando-en)
+- [Trabajando en](#trabajando-en)
 ---
 #### Instalación
 Será necesario tener instalado el programa *FreeCAD* el cual se puede descargar desde [este enlace][dirFreeCADesp]
@@ -172,38 +197,63 @@ Una vez tengamos estos archivos en nuestra carpeta sólo queda crear una carpeta
 
 Si hemos seguido todos los pasos de manera correcta deberíamos tener en la carpeta Filter_Stage lo siguiente:
 
-![imagen](img/carpeta.jpg)
+![folder](img/carpeta.jpg)
 
 ---
 ---
 #### Funcionamiento del Workbench
 En este Workbench tendremos varios botones, cada uno con el fin de cumplir una finalidad.  
-  ![imagen](img/botones.jpg)
+  ![buttons](img/botones.jpg)
   
-1. El primer botón realiza el filter stage según fue diseñado.  
-![imagen](img/filter_stage.jpg)
+![filter_stage](img/filter_stage.jpg)
 
----
-2. El segundo botón nos permite modificar las siguientes 5 variables:
+1. El primer botón nos permite modificar 5 variables, si no se modifica ningún valor se realiza el filter stage como fue diseñado:  
+![layoutFS](img/layoutFS.jpg)  
 
   - Distancia de movimiento.  
-![imagen](img/filter_stage_top.jpg)
+![move](img/filter_stage_top.jpg)  
 
   - Ancho de la base: limitado al perfil de aluminio (10mm, 15mm, 20mm, 30mm y 40mm).  
-![image](img/tensioner_holder_ex_3profiles_side.jpg)
+![base](img/tensioner_holder_ex_3profiles_side.jpg)  
 
   - Tensioner stroke.  
-![imagen](img/idler_tensioner_stroke_draw.png)
+![tensioner](img/idler_tensioner_stroke_draw.png)  
 
   - Espesor de la pared.  
-![imagen](img/idler_tensioner_wallthick.jpg)
+![wall](img/idler_tensioner_wallthick.jpg)  
 
   - Tipo de tuerca: limitado a las métricas (M3, M4, M5 y M6).  
-![imagen](img/nut_metric.jpg)  
-![imagen](img/nut_metric_2.jpg)
+![nut_1](img/nut_metric.jpg)  
+![nut_2](img/nut_metric_2.jpg)  
+
+2. El segundo botón realizar el soporte del filtro y permite modificar las siguientes valirables:  
+![layoutFH](img/layoutFH.jpg)  
+
+- Tamaño del filtro.  
+- Ver guia lineal (Si/No).  
+
+
+3. El tercer botón realiza el tensionador y nos permite modificar las siguientes variables:  
+![layoutTensioner](img/layoutTensioner.jpg)  
+
+- Ancho de la base.  
+- Altura del soporte del tensionador.  
+- Tensioner stroke.  
+- Esperos de la pared.  
+- Tipo de tuerca.  
+- Ver tornillos (Si/No).  
+
+4. El cuarto botón realiza el soporte del motor permitiendo modificar:
+![layoutMotor](img/layoutMotor.jpg)  
+
+- Tamaño del motor.
+- Altura máxima del rail.
+- Mostrar motor (Si/No).
+
+5. El quinto botón modifica la posición del objeto seleccionado a su posición de impresión. 
 
 ---
 ---
-#### Trabajando en:
+#### Trabajando en
 Actualmente se trabaja en:
-- *Botones adicionales para la realización de las piezas principales del proyecto*
+- *Exportar objeto en .stl al pulsar el último botón.*
