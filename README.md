@@ -73,7 +73,7 @@ If all these steps was followed now we have something similar to this:
 ---
 ---
 #### How it work
-This workbench has two buttons  
+This workbench has some buttons  
 ![buttons](img/botones.jpg)
 
 ![filter_stage](img/filter_stage.jpg)
