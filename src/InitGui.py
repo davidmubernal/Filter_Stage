@@ -64,7 +64,7 @@ class FilterStageWorkbench (Workbench):
         # python file where the commands are:
         import Filter_StageGui
         # list of commands:
-        cmdlist = [ "Filter_Stage_filter_stage","Filter_Stage_Mod"] #,"Filter_Holder","Tensioner","Step_Motor_Holder"]  Next Upgrade
+        cmdlist = ["Filter_Stage","Filter_Holder","Tensioner","Motor_Holder","PosAndExport"] #"Filter_Stage_filter_stage",
         self.appendToolbar(
             str(QtCore.QT_TRANSLATE_NOOP("FilterStage", "FilterStage")), cmdlist)
         self.appendMenu(
