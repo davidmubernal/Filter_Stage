@@ -19,11 +19,41 @@ STOL = TOL / 2.0       # smaller tolerance
 LAYER3D_H = 0.3  
 
 # ---------------------- linear Bearings
-LMEUU_L = { 8: 25., 10: 29.0, 12: 32.0 }; #the length of the bearing
-LMEUU_D = { 8: 16., 10: 19.0, 12: 22.0 }; #diamenter of the bearing 
+LMUU_D = { 6: 12., 8: 15., 10: 19.0, 12: 21.0 }; #diamenter of the bearing 
+LMUU_L = { 6: 19., 8: 24., 10: 29.0, 12: 30.0 }; #the length of the bearing
+
+LMEUU_D = {        8: 16., 10: 19.0, 12: 22.0 }; #diamenter of the bearing 
+LMEUU_L = {        8: 25., 10: 29.0, 12: 32.0 }; #the length of the bearing
 # Large:
 LMELUU_L = {                   12: 57.0 }; #the length of the bearing
 LMELUU_D = { 8: 16., 10: 19.0, 12: 22.0 }; #diamenter of the bearing 
+
+
+LM6UU = {
+         'Di' : 6,  # interior diameter
+         'De' : LMUU_D[6], # exterior diameter
+         'L' : LMUU_L[6] # length
+           }
+
+LM8UU = {
+         'Di' : 8,  # interior diameter
+         'De' : LMUU_D[8], # exterior diameter
+         'L' : LMUU_L[8] # length
+           }
+
+LM10UU = {
+         'Di' : 10,  # interior diameter
+         'De' : LMUU_D[10], # exterior diameter
+         'L' : LMUU_L[10] # length
+           }
+
+
+LM12UU = {
+         'Di' : 12,  # interior diameter
+         'De' : LMUU_D[12], # exterior diameter
+         'L' : LMUU_L[12] # length
+           }
+
 
 LME8UU = {
          'Di' : 8,  # interior diameter
@@ -49,6 +79,14 @@ LME12LUU = {
          'De' : LMELUU_D[12], # exterior diameter
          'L' : LMELUU_L[12] # length
            }
+
+
+LMUU = {
+          6 : LM6UU,
+          8 : LM8UU,
+         10 : LM10UU,  # same as LMEUU
+         12 : LM12UU
+        }
 
 
 LMEUU = {
@@ -784,6 +822,16 @@ NEMA_BOLT_D  = {
 # mbolt: is the metric of the mounting bolt
 # tbolt: is the metric of the tightening bolt
 
+SK6 =  { 'd':6.0,  'H':32.8, 'W':42.0, 'L':14.0, 'B':32.0, 'S':5.5,
+         'h':20.0,
+         #'A':21.0,
+         #'b': 5.0,
+         'g':6.0,
+         'I':18.0,
+         'mbolt': 5,
+         'tbolt': 4} 
+
+
 SK8 =  { 'd':8.0,  'H':32.8, 'W':42.0, 'L':14.0, 'B':32.0, 'S':5.5,
          'h':20.0,
          #'A':21.0,
@@ -792,6 +840,18 @@ SK8 =  { 'd':8.0,  'H':32.8, 'W':42.0, 'L':14.0, 'B':32.0, 'S':5.5,
          'I':18.0,
          'mbolt': 5,
          'tbolt': 4} 
+
+# to make with the same height of a pillow block
+# H: just 6.8 less
+PILLOW_SK8 =  { 'd':8.0,  'H':26., 'W':42.0, 'L':14.0, 'B':32.0, 'S':5.5,
+         'h':15.0,
+         #'A':21.0,
+         #'b': 5.0,
+         'g':6.0,
+         'I':18.0,
+         'mbolt': 5,
+         'tbolt': 4} 
+
 
 SK10 = { 'd':10.0, 'H':32.8, 'W':42.0, 'L':14.0, 'B':32.0, 'S':5.5,
          'h':20.0,
@@ -812,9 +872,16 @@ SK12 = { 'd':12.0, 'H':37.5, 'W':42.0, 'L':14.0, 'B':32.0, 'S':5.5,
          'tbolt': 4} 
 
 
-SK = {    8: SK8,
+SK = {
+          6: SK6,
+          8: SK8,
          10: SK10,
          12: SK12 }
+
+PILLOW_SK = {
+          8: PILLOW_SK8
+            }
+
 
 # ------------------------- T8 Nut for leadscrew ---------------------
 #   

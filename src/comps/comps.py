@@ -363,19 +363,25 @@ class Sk_dir (object):
                  ref_hr = 1,
                  ref_wc = 1,
                  ref_dc = 1,
+                 pillow = 0, #make it the same height of a pillow block
                  pos = V0,
                  wfco = 1,
+                 tol = 0.3,
                  name= "shaft_holder"):
         self.size = size
         self.wfco = wfco
         self.name = name
         self.pos = pos
+        self.tol = tol
         self.ref_hr = ref_hr
         self.ref_wc = ref_wc
         self.ref_dc = ref_dc
 
         doc = FreeCAD.ActiveDocument
-        skdict = kcomp.SK.get(size)
+        if pillow == 0:
+            skdict = kcomp.SK.get(size)
+        else:
+            skdict = kcomp.PILLOW_SK.get(size)
         if skdict == None:
             logger.error("Sk size %d not supported", size)
 
@@ -470,7 +476,7 @@ class Sk_dir (object):
 
         # Shaft hole, 
         rodcen_pos = pos + ref2rod_h + ref2cen_w + ref2cen_d
-        rod_hole = fcfun.shp_cylcenxtr(r= size/2.,
+        rod_hole = fcfun.shp_cylcenxtr(r= size/2. +self.tol,
                                          h = sk_d,
                                          normal = axis_d,
                                          ch = 1,
@@ -556,17 +562,19 @@ class Sk_dir (object):
         else:
             logger.debug("Object with no fco")
 
-#doc =FreeCAD.newDocument()
-#h_sk = Sk_dir (size = 12,
-#                 fc_axis_h = VZ,
-#                 fc_axis_d = VX,
-#                 fc_axis_w = V0,
-#                 ref_hr = 0,
-#                 ref_wc = 0,
-#                 ref_dc = 0,
-#                 pos = V0,
-#                 wfco = 1,
-#                 name= "shaft_holder")
+doc =FreeCAD.newDocument()
+h_sk = Sk_dir (size = 8,
+                 fc_axis_h = VX,
+                 fc_axis_d = VZ,
+                 fc_axis_w = V0,
+                 ref_hr = 0,
+                 ref_wc = 0,
+                 ref_dc = 0,
+                 pillow = 1,
+                 pos = V0,
+                 tol = 0.7, # for the pillow block
+                 wfco = 1,
+                 name= "sk8_pillow")
 
 
 # --------------------------------------------------------------------
