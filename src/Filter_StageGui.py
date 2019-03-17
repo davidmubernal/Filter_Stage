@@ -490,7 +490,7 @@ class MotorHolderTaskPanel:
         self.Size_Holder_Label = QtGui.QLabel("Size")
         self.ComboBox_Size_Holder = QtGui.QComboBox()
         # Type of Nut
-        self.TextSizeHolder = ["11","17"]
+        self.TextSizeHolder = ["8","11","14","17","23","34","42"]
         self.ComboBox_Size_Holder.addItems(self.TextSizeHolder)
         # Indicate inicial value in ComboBox
         self.ComboBox_Size_Holder.setCurrentIndex(self.TextSizeHolder.index('11'))
@@ -515,7 +515,7 @@ class MotorHolderTaskPanel:
         layout.addWidget(self.ComboBox_Set,2,1,1,1)
 
     def accept(self):
-        SizeHolder = {0:11,1:17}#,2:,3:,}
+        SizeHolder = {0:8, 1:11, 2:14, 3:17, 4:23, 5:34, 6:42}
         self.size_motor = SizeHolder[self.ComboBox_Size_Holder.currentIndex()]
         Set_Select = self.ComboBox_Set.currentIndex()
         h_motor=self.motor_high_Value.value()
